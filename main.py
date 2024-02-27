@@ -10,7 +10,7 @@ class Solution:
             graph[a].append(b)
             graph[b].append(a)  # Assuming it's an undirected graph, add both ways
 
-        marked = [False] * n
+        # marked = [False] * n
        
         
         
@@ -26,25 +26,46 @@ class Solution:
         #     return False        
         # return dfs(source)
                        
-        ## Using Stack
+        # ## Using Stack
 
-        stack = [source]
+        # stack = [source]
 
-        # Use a set for visited to optimize the lookup time
-        visited = set()
+        # # Use a set for visited to optimize the lookup time
+        # visited = set()
         
-        while stack:
-            v = stack.pop()
+        # while stack:
+        #     v = stack.pop()
+        #     if v == dest:
+        #         return True
+            
+        #     if v not in visited:
+        #         visited.add(v)
+
+        #     for neighbor in graph[v]:
+        #         if neighbor not in visited:
+        #             stack.append(neighbor)
+        # return False 
+
+
+        # Using BFS
+
+        queue = deque([source])
+        visited = set([source])
+
+        while queue:
+            v = queue.popleft()
+
             if v == dest:
                 return True
-            
-            if v not in visited:
-                visited.add(v)
 
             for neighbor in graph[v]:
                 if neighbor not in visited:
-                    stack.append(neighbor)
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+
         return False              
+              
+
 
 
         
